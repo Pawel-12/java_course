@@ -1,5 +1,7 @@
 package com.solvd.laba.block1.task2;
 
+import java.util.Objects;
+
 public class Location {
     private String town;
     private String road;
@@ -48,5 +50,23 @@ public class Location {
 
     public double calcDistance(Location loc2) {
         return this.cords.calcDistance(loc2.getCords());
+    }
+
+    @Override
+    public String toString() {
+        return town + " " + road + " " + houseNumber + " " + cords.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Location location = (Location) o;
+        return houseNumber == location.houseNumber && Objects.equals(town, location.town) && Objects.equals(road, location.road) && Objects.equals(cords, location.cords);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(town, road, houseNumber, cords);
     }
 }

@@ -1,5 +1,7 @@
 package com.solvd.laba.block1.task2;
 
+import java.util.Objects;
+
 public class Item {
     private String name;
     private float width;
@@ -54,5 +56,27 @@ public class Item {
 
     public void setWeight(float weight) {
         this.weight = weight;
+    }
+
+    @Override
+    public String toString() {
+        return '\"' + name + '\"' + '\t' +
+                "width = " + width +
+                ", height = " + height +
+                ", depth = " + depth +
+                ", weight = " + weight;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return Float.compare(width, item.width) == 0 && Float.compare(height, item.height) == 0 && Float.compare(depth, item.depth) == 0 && Float.compare(weight, item.weight) == 0 && Objects.equals(name, item.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, width, height, depth, weight);
     }
 }

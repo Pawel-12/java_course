@@ -54,4 +54,11 @@ public class Delivery {
         this.priority = priority;
 //        updatePrice();
     }
+
+    @Override
+    public String toString() {
+        return package1 +
+                ", vehicle = " + vehicle.getName() +
+                ", priority = " + priority.getName();
+    }
 }

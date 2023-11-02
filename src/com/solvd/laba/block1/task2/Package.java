@@ -30,7 +30,7 @@ public class Package {
         return distance;
     }
 
-    
+
     public void setItem(Item item) {
         this.item = item;
     }
@@ -47,5 +47,15 @@ public class Package {
 
     public void setDistance(float distance) {
         this.distance = distance;
+    }
+
+    @Override
+    public String toString() {
+        return "Package{" +
+                "item=" + item +
+                ", source=" + source +
+                ", destination=" + destination +
+                ", distance=" + distance +
+                '}';
     }
 }
