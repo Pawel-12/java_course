@@ -1,35 +1,38 @@
 package com.solvd.laba.block1.task2;
 
-abstract public class Person {
+import com.solvd.laba.block1.task2.interfaces.HasId;
+import com.solvd.laba.block1.task2.interfaces.HasName;
+
+public abstract class Person implements HasId, HasName {
     protected String name;
-    protected int id;
+    protected final int id = calcId();
     protected float accountBalance;
 
-    public String getName() {
+    public final String getName() {
         return name;
     }
 
-    public int getId() {
+    public final int getId() {
         return id;
     }
 
-    public float getAccountBalance() {
+    public final float getAccountBalance() {
         return accountBalance;
     }
 
 
-    abstract public void printAccountBalance();
+    public abstract void printAccountBalance();
 
 
-    public void setName(String name) {
+    public final void setName(String name) {
         this.name = name;
     }
 
-    public void setId(int id) {
+/*    public final void setId(int id) {
         this.id = id;
-    }
+    }*/
 
-    public void setAccountBalance(float balance) {
+    public final void setAccountBalance(float balance) {
         accountBalance = balance;
     }
 }

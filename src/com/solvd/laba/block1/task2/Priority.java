@@ -1,6 +1,9 @@
 package com.solvd.laba.block1.task2;
 
-public class Priority {
+import com.solvd.laba.block1.task2.interfaces.HasName;
+import com.solvd.laba.block1.task2.interfaces.HasRate;
+
+public class Priority implements HasRate, HasName {
     private String name;
     private float rate;
 

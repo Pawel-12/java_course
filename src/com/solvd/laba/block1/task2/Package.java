@@ -1,6 +1,8 @@
 package com.solvd.laba.block1.task2;
 
-public class Package {
+import com.solvd.laba.block1.task2.interfaces.PhysicalObject;
+
+public class Package implements PhysicalObject {
     private Item item;
     private Location source;
     private Location destination;
@@ -52,10 +54,10 @@ public class Package {
     @Override
     public String toString() {
         return "Package{" +
-                "item=" + item +
-                ", source=" + source +
-                ", destination=" + destination +
-                ", distance=" + distance +
+                "item = {" + item +
+                "}, source = {" + source +
+                "}, destination = {" + destination +
+                "}, distance = " + distance +
                 '}';
     }
 }

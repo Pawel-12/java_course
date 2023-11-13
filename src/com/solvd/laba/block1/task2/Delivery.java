@@ -6,16 +6,23 @@ public class Delivery {
     //private float price;
     private Priority priority;
 
-//    private void updatePrice() {
-//        this.price = (package1.getItem().getPrice() + (package1.getDistance() * vehicle.getRate())) * priority.getRate();
-//    }
+    private static int deliveriesCount;
+
+    static {
+        deliveriesCount = 0;
+    }
+
+    /*private void updatePrice() {
+        this.price = (package1.getItem().getPrice() + (package1.getDistance() * vehicle.getRate())) * priority.getRate();
+    }*/
 
     public Delivery(Package package1, Vehicle vehicle, Priority priority) {
         this.package1 = package1;
         this.vehicle = vehicle;
         this.priority = priority;
 
-//        updatePrice();
+        deliveriesCount++;
+        //updatePrice();
     }
 
 
@@ -27,32 +34,36 @@ public class Delivery {
         return vehicle;
     }
 
-//    public float getPrice() {
-//        return price;
-//    }
+    /*public float getPrice() {
+        return price;
+    }*/
 
     public Priority getPriority() {
         return priority;
     }
 
+    public static int getDeliveriesCount() {
+        return deliveriesCount;
+    }
+
 
     public void setPackage(Package package1) {
         this.package1 = package1;
-//        updatePrice();
+        //updatePrice();
     }
 
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
-//        updatePrice();
+        //updatePrice();
     }
 
-//    public void setPrice(float price) {
-//        this.price = price;
-//    }
+    /*public void setPrice(float price) {
+        this.price = price;
+    }*/
 
     public void setPriority(Priority priority) {
         this.priority = priority;
-//        updatePrice();
+        //updatePrice();
     }
 
     @Override

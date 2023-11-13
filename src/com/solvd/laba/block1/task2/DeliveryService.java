@@ -1,6 +1,112 @@
 package com.solvd.laba.block1.task2;
 
+import java.util.*;
+
 public class DeliveryService {
+    private Map<Integer, Client> clients;
+    private Map<Integer, Employee> employees;
+    private Map<String, Vehicle> vehicles;
+    private Map<String, Priority> priorities;
+
+    private Map<Integer, ArrayList<Order>> orders;
+
+    private ArrayList<Delivery> deliveries;
+    private ArrayList<Delivery> deliveriesArchive;
+
+    DeliveryService() {
+        this.clients = new HashMap<>();
+        this.employees = new HashMap<>();
+        this.vehicles = new HashMap<>();
+        this.priorities = new HashMap<>();
+        this.orders = new HashMap<>();
+        this.deliveries = new ArrayList<>();
+        this.deliveriesArchive = new ArrayList<>();
+    }
+
+    public void addClient(Client... client) {
+        for (Client c : client)
+            clients.putIfAbsent(c.getId(), c);
+    }
+
+    public void addEmployee(Employee... employee) {
+        for (Employee emp : employee)
+            employees.putIfAbsent(emp.getId(), emp);
+    }
+
+    public void addVehicle(Vehicle... vehicle) {
+        for (Vehicle v : vehicle)
+            vehicles.putIfAbsent(v.getName(), v);
+    }
+
+
+    public void addPriority(Priority... priority) {
+        for (Priority p : priority)
+            priorities.putIfAbsent(p.getName(), p);
+    }
+
+    public void newOrder(Client client, Delivery... delivery) {
+
+        Order order = new Order(delivery, client);
+
+        this.deliveries.addAll(Arrays.asList(delivery));
+
+        clients.putIfAbsent(client.getId(), client);
+
+        orders.putIfAbsent(client.getId(), new ArrayList<>());
+        orders.get(client.getId()).add(order);
+
+        int i = 0;
+        for (Delivery d : delivery)
+            System.out.println("Delivery " + ++i + " = " + calculateSingleDeliveryCost(d));
+
+        System.out.println("Total =  " + calculateTotalOrderCost(order) + '\n');
+
+        client.setAccountBalance((float) (client.getAccountBalance() - calculateTotalOrderCost(order)));
+    }
+
+    public void processDeliveries() {
+
+        int i = 0;
+        for (Delivery d : deliveries)
+            for (Employee e : employees.values())
+                if (e instanceof Driver)
+                    if (((Driver) e).getUsedVehicles().contains(d.getVehicle().getName())) {
+                        ((Driver) e).addDelivery(d);
+                        deliveriesArchive.add(d);
+                        deliveries.set(i, null);
+                        i++;
+                    }
+
+        deliveries.removeIf(Objects::isNull);
+    }
+
+    public Map<Integer, Client> getClients() {
+        return clients;
+    }
+
+    public Map<Integer, Employee> getEmployees() {
+        return employees;
+    }
+
+    public Map<String, Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    public Map<String, Priority> getPriorities() {
+        return priorities;
+    }
+
+    public Map<Integer, ArrayList<Order>> getOrders() {
+        return orders;
+    }
+
+    public ArrayList<Delivery> getDeliveries() {
+        return deliveries;
+    }
+
+    public ArrayList<Delivery> getDeliveriesArchive() {
+        return deliveriesArchive;
+    }
 
     public static double calculateSingleDeliveryCost(Delivery delivery) {
         double result = 0;

@@ -1,11 +1,10 @@
 package com.solvd.laba.block1.task2;
 
+import com.solvd.laba.block1.task2.interfaces.Trackable;
+
 import java.util.Objects;
 
-import static java.lang.Math.pow;
-import static java.lang.Math.sqrt;
-
-public class Cords {
+public class Cords implements Trackable {
     private float x;
     private float y;
 
@@ -30,8 +29,15 @@ public class Cords {
         this.y = y;
     }
 
-    public double calcDistance(Cords cords2) {
-        return sqrt(pow(cords2.x - x, 2)) + sqrt(pow(cords2.y - y, 2));
+    @Override
+    public Cords getCords() {
+        return this;
+    }
+
+    @Override
+    public void setCords(Cords cords) {
+        this.x = cords.x;
+        this.y = cords.y;
     }
 
     @Override

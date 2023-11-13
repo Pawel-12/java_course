@@ -1,20 +1,44 @@
 package com.solvd.laba.block1.task2;
 
-public class Driver extends Employee {
-    protected Delivery[] deliveries;
+import java.util.ArrayList;
 
-    public Driver(String name, int id, float salary) {
+public final class Driver extends Employee {
+    private ArrayList<Delivery> deliveries;
+    private int nextid = 0;
+
+    private ArrayList<String> usedVehicles;
+
+    public Driver(String name, float salary, ArrayList<String> usedVehicles) {
         this.name = name;
-        this.id = id;
+        //this.id = id;
         this.salary = salary;
+        this.usedVehicles = usedVehicles;
+        this.deliveries = new ArrayList<>();
     }
 
-    public Delivery[] getDeliveries() {
+    @Override
+    public int calcId() {
+        return nextid++;
+    }
+
+    public ArrayList<Delivery> getDeliveries() {
         return deliveries;
     }
 
-    public void setDeliveries(Delivery[] deliveries) {
+    public ArrayList<String> getUsedVehicles() {
+        return usedVehicles;
+    }
+
+    public void setDeliveries(ArrayList<Delivery> deliveries) {
         this.deliveries = deliveries;
+    }
+
+    public void setUsedVehicles(ArrayList<String> usedVehicles) {
+        this.usedVehicles = usedVehicles;
+    }
+
+    public void addDelivery(Delivery delivery) {
+        this.deliveries.add(delivery);
     }
 
     @Override
@@ -27,7 +51,7 @@ public class Driver extends Employee {
         StringBuilder result = new StringBuilder("Driver \"" + name +
                 "\" ID " + id +
                 "\taccountbalance = " + accountBalance +
-                ", salary = " + salary + "\nAssigned deliveries: \n");
+                ", salary = " + salary + ", usedVehicles = " + usedVehicles + "\nAssigned deliveries: \n");
 
         if (deliveries != null)
             for (Delivery d : deliveries)

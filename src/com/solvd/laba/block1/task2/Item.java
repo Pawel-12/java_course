@@ -1,8 +1,11 @@
 package com.solvd.laba.block1.task2;
 
+import com.solvd.laba.block1.task2.interfaces.HasName;
+import com.solvd.laba.block1.task2.interfaces.PhysicalObject;
+
 import java.util.Objects;
 
-public class Item {
+public class Item implements PhysicalObject, HasName {
     private String name;
     private float width;
     private float height;
@@ -37,6 +40,10 @@ public class Item {
         return weight;
     }
 
+    @Override
+    public Item getItem() {
+        return this;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -59,9 +66,18 @@ public class Item {
     }
 
     @Override
+    public void setItem(Item item) {
+        this.name = item.name;
+        this.width = item.width;
+        this.height = item.height;
+        this.depth = item.depth;
+        this.weight = item.weight;
+    }
+
+    @Override
     public String toString() {
-        return '\"' + name + '\"' + '\t' +
-                "width = " + width +
+        return '\"' + name + '\"' +
+                ", width = " + width +
                 ", height = " + height +
                 ", depth = " + depth +
                 ", weight = " + weight;

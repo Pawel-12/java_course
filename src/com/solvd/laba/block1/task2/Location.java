@@ -1,8 +1,10 @@
 package com.solvd.laba.block1.task2;
 
+import com.solvd.laba.block1.task2.interfaces.Trackable;
+
 import java.util.Objects;
 
-public class Location {
+public class Location implements Trackable {
     private String town;
     private String road;
     private int houseNumber;
@@ -27,6 +29,7 @@ public class Location {
         return houseNumber;
     }
 
+    @Override
     public Cords getCords() {
         return cords;
     }
@@ -44,12 +47,9 @@ public class Location {
         this.houseNumber = houseNumber;
     }
 
+    @Override
     public void setCords(Cords cords) {
         this.cords = cords;
-    }
-
-    public double calcDistance(Location loc2) {
-        return this.cords.calcDistance(loc2.getCords());
     }
 
     @Override
