@@ -5,8 +5,6 @@ import java.util.*;
 public class DeliveryService {
     private Map<Integer, Client> clients;
     private Map<Integer, Employee> employees;
-    private Map<String, Vehicle> vehicles;
-    private Map<String, Priority> priorities;
 
     private Map<Integer, ArrayList<Order>> orders;
 
@@ -16,8 +14,6 @@ public class DeliveryService {
     DeliveryService() {
         this.clients = new HashMap<>();
         this.employees = new HashMap<>();
-        this.vehicles = new HashMap<>();
-        this.priorities = new HashMap<>();
         this.orders = new HashMap<>();
         this.deliveries = new ArrayList<>();
         this.deliveriesArchive = new ArrayList<>();
@@ -31,17 +27,6 @@ public class DeliveryService {
     public void addEmployee(Employee... employee) {
         for (Employee emp : employee)
             employees.putIfAbsent(emp.getId(), emp);
-    }
-
-    public void addVehicle(Vehicle... vehicle) {
-        for (Vehicle v : vehicle)
-            vehicles.putIfAbsent(v.getName(), v);
-    }
-
-
-    public void addPriority(Priority... priority) {
-        for (Priority p : priority)
-            priorities.putIfAbsent(p.getName(), p);
     }
 
     public void newOrder(Client client, Delivery... delivery) {
@@ -86,14 +71,6 @@ public class DeliveryService {
 
     public Map<Integer, Employee> getEmployees() {
         return employees;
-    }
-
-    public Map<String, Vehicle> getVehicles() {
-        return vehicles;
-    }
-
-    public Map<String, Priority> getPriorities() {
-        return priorities;
     }
 
     public Map<Integer, ArrayList<Order>> getOrders() {

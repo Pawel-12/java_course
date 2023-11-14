@@ -15,9 +15,6 @@ public class Main {
         Priority normal = new Priority("Normal", 1);
         Priority fast = new Priority("Fast", 1.5F);
 
-        delService.addVehicle(car, airplane);
-        delService.addPriority(normal, fast);
-
 
         Client john = new Client("John");
         delService.addClient(john);
@@ -48,18 +45,10 @@ public class Main {
 
         delService.processDeliveries();
 
+
         System.out.println(mike);
         mike.printAccountBalance();
 
-        /*
-        Order johnOrder = new Order(new Delivery[]{delivery1, delivery2}, john);
-        List<Delivery> mikeDeliveries = new ArrayList<>();
-
-        for (Delivery d : johnOrder.getDeliveries())
-            if (d.getVehicle().getName().equals("Car"))
-                mikeDeliveries.add(d);
-
-        mike.setDeliveries(mikeDeliveries.toArray(new Delivery[0]));*/
 
         System.out.println("\nNot assigned:\n " + delService.getDeliveries());
     }
