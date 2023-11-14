@@ -3,7 +3,7 @@ package com.solvd.laba.block1.task2;
 import java.util.ArrayList;
 
 public final class Driver extends Employee {
-    private ArrayList<Delivery> deliveries;
+    private MyLinkedList<Delivery> deliveries;
     private int nextid = 0;
 
     private ArrayList<String> usedVehicles;
@@ -13,7 +13,7 @@ public final class Driver extends Employee {
         //this.id = id;
         this.salary = salary;
         this.usedVehicles = usedVehicles;
-        this.deliveries = new ArrayList<>();
+        this.deliveries = new MyLinkedList<>();
     }
 
     @Override
@@ -21,7 +21,7 @@ public final class Driver extends Employee {
         return nextid++;
     }
 
-    public ArrayList<Delivery> getDeliveries() {
+    public MyLinkedList<Delivery> getDeliveries() {
         return deliveries;
     }
 
@@ -29,7 +29,7 @@ public final class Driver extends Employee {
         return usedVehicles;
     }
 
-    public void setDeliveries(ArrayList<Delivery> deliveries) {
+    public void setDeliveries(MyLinkedList<Delivery> deliveries) {
         this.deliveries = deliveries;
     }
 
@@ -54,8 +54,8 @@ public final class Driver extends Employee {
                 ", salary = " + salary + ", usedVehicles = " + usedVehicles + "\nAssigned deliveries: \n");
 
         if (deliveries != null)
-            for (Delivery d : deliveries)
-                result.append("- ").append(d.toString()).append('\n');
+            for (int i = 0; i < deliveries.size(); i++)
+                result.append("- ").append(deliveries.get(i).toString()).append('\n');
         else
             result.append("*empty* \n");
 

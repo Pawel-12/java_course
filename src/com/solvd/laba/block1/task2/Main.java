@@ -22,7 +22,7 @@ public class Main {
         Client john = new Client("John");
         delService.addClient(john);
 
-        Driver mike = new Driver("Mike", 2000, new ArrayList<>(List.of("Car", "Airplane")));
+        Driver mike = new Driver("Mike", 2000, new ArrayList<>(List.of("Car")));
         delService.addEmployee(mike);
 
 
@@ -61,6 +61,6 @@ public class Main {
 
         mike.setDeliveries(mikeDeliveries.toArray(new Delivery[0]));*/
 
-        System.out.println(delService.getDeliveries());
+        System.out.println("\nNot assigned:\n " + delService.getDeliveries());
     }
 }
