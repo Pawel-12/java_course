@@ -1,16 +1,18 @@
 package com.solvd.laba.block1.task2;
 
+import com.solvd.laba.block1.task2.persons.Client;
+
 public class Order {
     private Delivery[] deliveries;
     private Client client;
-//    private float totalPrice;
+    //private float totalPrice;
 
     public Order(Delivery[] deliveries, Client client) {
         this.deliveries = deliveries;
         this.client = client;
 
-//        for (Delivery delivery : this.deliveries)
-//            this.totalPrice += delivery.getPrice();
+        //for (Delivery delivery : this.deliveries)
+        //  this.totalPrice += delivery.getPrice();
     }
 
     public Delivery[] getDeliveries() {
@@ -21,9 +23,9 @@ public class Order {
         return client;
     }
 
-//    public float getTotalPrice() {
-//        return totalPrice;
-//    }
+    /*public float getTotalPrice() {
+        return totalPrice;
+     }*/
 
     public void setDeliveries(Delivery[] deliveries) {
         this.deliveries = deliveries;
@@ -33,7 +35,7 @@ public class Order {
         this.client = client;
     }
 
-//    public void setTotalPrice(float totalPrice) {
-//        this.totalPrice = totalPrice;
-//    }
+    /*public void setTotalPrice(float totalPrice) {
+        this.totalPrice = totalPrice;
+    }*/
 }

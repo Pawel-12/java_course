@@ -1,5 +1,9 @@
 package com.solvd.laba.block1.task2;
 
+import com.solvd.laba.block1.task2.persons.Client;
+import com.solvd.laba.block1.task2.persons.Driver;
+import com.solvd.laba.block1.task2.persons.Employee;
+
 import java.util.*;
 
 public class DeliveryService {
@@ -11,7 +15,7 @@ public class DeliveryService {
     private ArrayList<Delivery> deliveries;
     private ArrayList<Delivery> deliveriesArchive;
 
-    DeliveryService() {
+    public DeliveryService() {
         this.clients = new HashMap<>();
         this.employees = new HashMap<>();
         this.orders = new HashMap<>();

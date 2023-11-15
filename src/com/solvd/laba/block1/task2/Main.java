@@ -1,5 +1,8 @@
 package com.solvd.laba.block1.task2;
 
+import com.solvd.laba.block1.task2.persons.Client;
+import com.solvd.laba.block1.task2.persons.Driver;
+
 import java.util.ArrayList;
 import java.util.List;
 

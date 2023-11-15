@@ -8,7 +8,7 @@ public class MyLinkedList<T> {
         private Node<U> next = null;
 
 
-        Node(U value) {
+        public Node(U value) {
             this.value = value;
         }
 
@@ -34,7 +34,7 @@ public class MyLinkedList<T> {
 
     private int size = 0;
 
-    MyLinkedList() {
+    public MyLinkedList() {
     }
 
     public T get(int index) {

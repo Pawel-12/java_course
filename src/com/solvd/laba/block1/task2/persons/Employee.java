@@ -1,4 +1,4 @@
-package com.solvd.laba.block1.task2;
+package com.solvd.laba.block1.task2.persons;
 
 public abstract class Employee extends Person {
     protected float salary;

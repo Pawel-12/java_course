@@ -1,4 +1,4 @@
-package com.solvd.laba.block1.task2;
+package com.solvd.laba.block1.task2.persons;
 
 import com.solvd.laba.block1.task2.interfaces.HasId;
 import com.solvd.laba.block1.task2.interfaces.HasName;
