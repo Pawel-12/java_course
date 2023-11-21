@@ -1,5 +1,6 @@
 package com.solvd.laba.block1.task2;
 
+import com.solvd.laba.block1.task2.exceptions.NegativeDistanceException;
 import com.solvd.laba.block1.task2.interfaces.PhysicalObject;
 
 public class Package implements PhysicalObject {
@@ -47,7 +48,9 @@ public class Package implements PhysicalObject {
         distance = (float) source.calcDistance(destination);
     }
 
-    public void setDistance(float distance) {
+    public void setDistance(float distance) throws NegativeDistanceException {
+        if (distance < 0)
+            throw new NegativeDistanceException("Distance cannot be negative!");
         this.distance = distance;
     }
 

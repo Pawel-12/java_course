@@ -2,8 +2,11 @@ package com.solvd.laba.block1.task2.persons;
 
 import com.solvd.laba.block1.task2.Delivery;
 import com.solvd.laba.block1.task2.MyLinkedList;
+import com.solvd.laba.block1.task2.exceptions.NegativeSalaryException;
 
 import java.util.ArrayList;
+
+import static com.solvd.laba.block1.task2.Main.LOGGER;
 
 public final class Driver extends Employee {
     private MyLinkedList<Delivery> deliveries;
@@ -11,10 +14,10 @@ public final class Driver extends Employee {
 
     private ArrayList<String> usedVehicles;
 
-    public Driver(String name, float salary, ArrayList<String> usedVehicles) {
+    public Driver(String name, float salary, ArrayList<String> usedVehicles) throws NegativeSalaryException {
+        setSalary(salary);
+
         this.name = name;
-        //this.id = id;
-        this.salary = salary;
         this.usedVehicles = usedVehicles;
         this.deliveries = new MyLinkedList<>();
     }
@@ -46,7 +49,7 @@ public final class Driver extends Employee {
 
     @Override
     public void printAccountBalance() {
-        System.out.println("You have " + accountBalance + " on your salary account, next salary value is " + salary);
+        LOGGER.info("You have " + accountBalance + " on your salary account, next salary value is " + salary + '\n');
     }
 
     @Override

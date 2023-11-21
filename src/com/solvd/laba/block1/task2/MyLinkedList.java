@@ -1,5 +1,7 @@
 package com.solvd.laba.block1.task2;
 
+import com.solvd.laba.block1.task2.exceptions.mylinkedlistexceptions.InvalidIndexException;
+
 import java.util.Collection;
 
 public class MyLinkedList<T> {
@@ -38,22 +40,18 @@ public class MyLinkedList<T> {
     }
 
     public T get(int index) {
-        if (head == null)
+        Node<T> temp = getNode(index);
+
+        if (temp != null)
+            return temp.getValue();
+        else
             return null;
-
-        Node<T> temp = head;
-
-        for (int i = 0; i < index; i++)
-            if (temp.getNext() != null)
-                temp = temp.getNext();
-            else
-                return null;
-
-        return temp.getValue();
     }
 
     private Node<T> getNode(int index) {
-        if (head == null)
+        if (index < 0)
+            throw new InvalidIndexException("Index value is negative!");
+        else if (head == null)
             return null;
 
         Node<T> temp = head;
@@ -89,7 +87,7 @@ public class MyLinkedList<T> {
 
     public void remove(int index) {
         if (head == null || getNode(index) == null)
-            return;
+            throw new InvalidIndexException("Invalid index!");
 
         Node<T> before = getNode(index - 1);
         Node<T> after = getNode(index + 1);
@@ -104,17 +102,23 @@ public class MyLinkedList<T> {
 
     public void set(int index, T value) {
         if (getNode(index) == null)
-            return;
-
-        getNode(index).setValue(value);
+            throw new InvalidIndexException("Invalid index!");
+        else
+            getNode(index).setValue(value);
     }
 
     public T getHead() {
-        return head.getValue();
+        if (head != null)
+            return head.getValue();
+        else
+            return null;
     }
 
     public T getTail() {
-        return tail.getValue();
+        if (tail != null)
+            return tail.getValue();
+        else
+            return null;
     }
 
     public int size() {

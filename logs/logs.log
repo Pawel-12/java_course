@@ -1,0 +1,20 @@
+08:55:08.066 [main] INFO  com.solvd.laba.block1.task2.Main - You have 0.0 available to pay for deliveries
+
+08:55:08.073 [main] INFO  com.solvd.laba.block1.task2.Main - Delivery 1 = 15.0
+
+08:55:08.073 [main] INFO  com.solvd.laba.block1.task2.Main - Delivery 2 = 88.5
+
+08:55:08.074 [main] INFO  com.solvd.laba.block1.task2.Main - Total =  103.5
+
+08:55:08.075 [main] INFO  com.solvd.laba.block1.task2.Main - You have unpaid orders with total value of 103.5
+
+08:55:08.092 [main] INFO  com.solvd.laba.block1.task2.Main - 
+Driver "Mike" ID 0	accountbalance = 0.0, salary = 2000.0, usedVehicles = [Car]
+Assigned deliveries: 
+- Package{item = {"Letter", width = 5.0, height = 5.0, depth = 5.0, weight = 0.1}, source = {Test test 1 [0.0,0.0]}, destination = {Test2 test2 2 [2.0,2.0]}, distance = 4.0}, vehicle = Car, priority = Normal
+
+08:55:08.092 [main] INFO  com.solvd.laba.block1.task2.Main - You have 0.0 on your salary account, next salary value is 2000.0
+
+08:55:08.093 [main] INFO  com.solvd.laba.block1.task2.Main - 
+Not assigned:
+ [Package{item = {"Box", width = 10.0, height = 10.0, depth = 10.0, weight = 6.0}, source = {Test test 1 [0.0,0.0]}, destination = {Test2 test2 2 [2.0,2.0]}, distance = 4.0}, vehicle = Airplane, priority = Fast]

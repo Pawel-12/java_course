@@ -4,7 +4,10 @@ import com.solvd.laba.block1.task2.persons.Client;
 import com.solvd.laba.block1.task2.persons.Driver;
 import com.solvd.laba.block1.task2.persons.Employee;
 
+import java.io.FileWriter;
 import java.util.*;
+
+import static com.solvd.laba.block1.task2.Main.LOGGER;
 
 public class DeliveryService {
     private Map<Integer, Client> clients;
@@ -46,9 +49,9 @@ public class DeliveryService {
 
         int i = 0;
         for (Delivery d : delivery)
-            System.out.println("Delivery " + ++i + " = " + calculateSingleDeliveryCost(d));
+            LOGGER.info("Delivery " + ++i + " = " + calculateSingleDeliveryCost(d) + '\n');
 
-        System.out.println("Total =  " + calculateTotalOrderCost(order) + '\n');
+        LOGGER.info("Total =  " + calculateTotalOrderCost(order) + '\n');
 
         client.setAccountBalance((float) (client.getAccountBalance() - calculateTotalOrderCost(order)));
     }
@@ -87,6 +90,18 @@ public class DeliveryService {
 
     public ArrayList<Delivery> getDeliveriesArchive() {
         return deliveriesArchive;
+    }
+
+    public void saveClients() {
+        try (FileWriter fw = new FileWriter("data/clients.txt")) {
+            for (Client c : clients.values())
+                fw.write(c.toString());
+
+            fw.close();
+
+        } catch (Exception e) {
+            LOGGER.error("FileWriter error ", e);
+        }
     }
 
     public static double calculateSingleDeliveryCost(Delivery delivery) {

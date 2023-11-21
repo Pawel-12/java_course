@@ -2,27 +2,56 @@ package com.solvd.laba.block1.task2;
 
 import com.solvd.laba.block1.task2.persons.Client;
 import com.solvd.laba.block1.task2.persons.Driver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
+    static {
+        System.setProperty("log4j.configurationFile", "log4j2.xml");
+    }
+
+    public static final Logger LOGGER = LogManager.getLogger(Main.class);
+
     public static void main(String[] args) {
         System.out.println();
 
         DeliveryService delService = new DeliveryService();
 
-        Vehicle car = new Vehicle("Car", 1.25F);
-        Vehicle airplane = new Vehicle("Airplane", 2.25F);
+        Vehicle car = null;
+        Vehicle airplane = null;
 
-        Priority normal = new Priority("Normal", 1);
-        Priority fast = new Priority("Fast", 1.5F);
+        try {
+            car = new Vehicle("Car", 1.25F);
+            airplane = new Vehicle("Airplane", 2.25F);
+        } catch (Exception e) {
+            LOGGER.error("Caught exception ", e);
+        }
+
+        Priority normal = null;
+        Priority fast = null;
+
+        try {
+            normal = new Priority("Normal", 1);
+            fast = new Priority("Fast", 1.5F);
+        } catch (Exception e) {
+            LOGGER.error("Caught exception ", e);
+        }
 
 
         Client john = new Client("John");
         delService.addClient(john);
 
-        Driver mike = new Driver("Mike", 2000, new ArrayList<>(List.of("Car")));
+        Driver mike = null;
+
+        try {
+            mike = new Driver("Mike", 2000, new ArrayList<>(List.of("Car")));
+        } catch (Exception e) {
+            LOGGER.error("Caught exception ", e);
+        }
+        
         delService.addEmployee(mike);
 
 
@@ -49,10 +78,12 @@ public class Main {
         delService.processDeliveries();
 
 
-        System.out.println(mike);
+        LOGGER.info('\n' + mike.toString());
         mike.printAccountBalance();
 
 
-        System.out.println("\nNot assigned:\n " + delService.getDeliveries());
+        LOGGER.info("\nNot assigned:\n " + delService.getDeliveries());
+
+        delService.saveClients();
     }
 }

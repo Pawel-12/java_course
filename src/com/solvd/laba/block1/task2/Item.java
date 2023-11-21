@@ -1,5 +1,6 @@
 package com.solvd.laba.block1.task2;
 
+import com.solvd.laba.block1.task2.exceptions.NegativeItemSizeException;
 import com.solvd.laba.block1.task2.interfaces.HasName;
 import com.solvd.laba.block1.task2.interfaces.PhysicalObject;
 
@@ -13,6 +14,9 @@ public class Item implements PhysicalObject, HasName {
     private float weight;
 
     public Item(String name, float width, float height, float depth, float weight) {
+        if ((width < 0) || (height < 0) || (depth < 0) || (weight < 0))
+            throw new NegativeItemSizeException("At least one of values is negative!");
+
         this.name = name;
         this.width = width;
         this.height = height;
@@ -50,18 +54,26 @@ public class Item implements PhysicalObject, HasName {
     }
 
     public void setWidth(float width) {
+        if (width < 0)
+            throw new NegativeItemSizeException("Width cannot be negative!");
         this.width = width;
     }
 
     public void setHeight(float height) {
+        if (height < 0)
+            throw new NegativeItemSizeException("Height cannot be negative!");
         this.height = height;
     }
 
     public void setDepth(float depth) {
+        if (depth < 0)
+            throw new NegativeItemSizeException("Depth cannot be negative!");
         this.depth = depth;
     }
 
     public void setWeight(float weight) {
+        if (weight < 0)
+            throw new NegativeItemSizeException("Weight cannot be negative!");
         this.weight = weight;
     }
 
