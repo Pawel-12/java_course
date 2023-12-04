@@ -2,6 +2,7 @@ package com.solvd.laba.block1.task2;
 
 import com.solvd.laba.block1.task2.persons.Client;
 import com.solvd.laba.block1.task2.persons.Driver;
+import com.solvd.laba.block1.task2.utils.FileStats;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,6 +17,7 @@ public class Main {
     public static final Logger LOGGER = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
+        FileStats.countUniqueWords("data/log.txt");
         System.out.println();
 
         DeliveryService delService = new DeliveryService();

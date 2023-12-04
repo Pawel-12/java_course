@@ -1,20 +1,20 @@
-[INFO] 23:25:23.436 [com.solvd.laba.block1.task2.Main.main()] com.solvd.laba.block1.task2.Main - You have 0.0 available to pay for deliveries
+[INFO] 16:24:01.563 [main] com.solvd.laba.block1.task2.Main - You have 0.0 available to pay for deliveries
 
-[INFO] 23:25:23.442 [com.solvd.laba.block1.task2.Main.main()] com.solvd.laba.block1.task2.Main - Delivery 1 = 15.0
+[INFO] 16:24:01.569 [main] com.solvd.laba.block1.task2.Main - Delivery 1 = 15.0
 
-[INFO] 23:25:23.442 [com.solvd.laba.block1.task2.Main.main()] com.solvd.laba.block1.task2.Main - Delivery 2 = 88.5
+[INFO] 16:24:01.569 [main] com.solvd.laba.block1.task2.Main - Delivery 2 = 88.5
 
-[INFO] 23:25:23.444 [com.solvd.laba.block1.task2.Main.main()] com.solvd.laba.block1.task2.Main - Total =  103.5
+[INFO] 16:24:01.569 [main] com.solvd.laba.block1.task2.Main - Total =  103.5
 
-[INFO] 23:25:23.444 [com.solvd.laba.block1.task2.Main.main()] com.solvd.laba.block1.task2.Main - You have unpaid orders with total value of 103.5
+[INFO] 16:24:01.569 [main] com.solvd.laba.block1.task2.Main - You have unpaid orders with total value of 103.5
 
-[INFO] 23:25:23.456 [com.solvd.laba.block1.task2.Main.main()] com.solvd.laba.block1.task2.Main - 
+[INFO] 16:24:01.584 [main] com.solvd.laba.block1.task2.Main - 
 Driver "Mike" ID 0	accountbalance = 0.0, salary = 2000.0, usedVehicles = [Car]
 Assigned deliveries: 
 - Package{item = {"Letter", width = 5.0, height = 5.0, depth = 5.0, weight = 0.1}, source = {Test test 1 [0.0,0.0]}, destination = {Test2 test2 2 [2.0,2.0]}, distance = 4.0}, vehicle = Car, priority = Normal
 
-[INFO] 23:25:23.457 [com.solvd.laba.block1.task2.Main.main()] com.solvd.laba.block1.task2.Main - You have 0.0 on your salary account, next salary value is 2000.0
+[INFO] 16:24:01.584 [main] com.solvd.laba.block1.task2.Main - You have 0.0 on your salary account, next salary value is 2000.0
 
-[INFO] 23:25:23.457 [com.solvd.laba.block1.task2.Main.main()] com.solvd.laba.block1.task2.Main - 
+[INFO] 16:24:01.584 [main] com.solvd.laba.block1.task2.Main - 
 Not assigned:
  [Package{item = {"Box", width = 10.0, height = 10.0, depth = 10.0, weight = 6.0}, source = {Test test 1 [0.0,0.0]}, destination = {Test2 test2 2 [2.0,2.0]}, distance = 4.0}, vehicle = Airplane, priority = Fast]

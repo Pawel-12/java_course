@@ -1,8 +1,8 @@
 package com.solvd.laba.block1.task2.persons;
 
 import com.solvd.laba.block1.task2.Delivery;
-import com.solvd.laba.block1.task2.MyLinkedList;
 import com.solvd.laba.block1.task2.exceptions.NegativeSalaryException;
+import com.solvd.laba.block1.task2.utils.MyLinkedList;
 
 import java.util.ArrayList;
 

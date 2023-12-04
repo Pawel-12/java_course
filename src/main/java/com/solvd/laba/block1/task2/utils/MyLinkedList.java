@@ -1,4 +1,4 @@
-package com.solvd.laba.block1.task2;
+package com.solvd.laba.block1.task2.utils;
 
 import com.solvd.laba.block1.task2.exceptions.mylinkedlistexceptions.InvalidIndexException;
 
