@@ -6,6 +6,7 @@ import com.solvd.laba.block1.task2.persons.Employee;
 
 import java.io.FileWriter;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.solvd.laba.block1.task2.Main.LOGGER;
 
@@ -27,13 +28,11 @@ public class DeliveryService {
     }
 
     public void addClient(Client... client) {
-        for (Client c : client)
-            clients.putIfAbsent(c.getId(), c);
+        Arrays.stream(client).distinct().forEach(c -> clients.putIfAbsent(c.getId(), c));
     }
 
     public void addEmployee(Employee... employee) {
-        for (Employee emp : employee)
-            employees.putIfAbsent(emp.getId(), emp);
+        Arrays.stream(employee).distinct().forEach(emp -> employees.putIfAbsent(emp.getId(), emp));
     }
 
     public void newOrder(Client client, Delivery... delivery) {
@@ -58,16 +57,29 @@ public class DeliveryService {
 
     public void processDeliveries() {
 
-        int i = 0;
-        for (Delivery d : deliveries)
-            for (Employee e : employees.values())
-                if (e instanceof Driver)
-                    if (((Driver) e).getUsedVehicles().contains(d.getVehicle().getName())) {
-                        ((Driver) e).addDelivery(d);
-                        deliveriesArchive.add(d);
-                        deliveries.set(i, null);
-                        i++;
-                    }
+        List<Driver> drivers = employees.values().stream()
+                .filter(e -> e instanceof Driver)
+                .map(e -> (Driver) e).toList();
+
+        AtomicInteger i = new AtomicInteger();
+    /*for (Delivery d : deliveries)
+            for (Driver e : drivers)
+                if (e.getUsedVehicles().contains(d.getVehicle().getName())) {
+                    e.addDelivery(d);
+                    deliveriesArchive.add(d);
+                    deliveries.set(i.get(), null);
+                    i.getAndIncrement();
+                }*/
+
+        deliveries.forEach(del ->
+                drivers.stream()
+                        .filter(driver -> driver.getUsedVehicles().contains(del.getVehicle().getName()))
+                        .findFirst().ifPresent(driver -> {
+                            driver.addDelivery(del);
+                            deliveriesArchive.add(del);
+                            deliveries.set(i.get(), null);
+                            i.getAndIncrement();
+                        }));
 
         deliveries.removeIf(Objects::isNull);
     }
@@ -106,12 +118,13 @@ public class DeliveryService {
 
     public static double calculateSingleDeliveryCost(Delivery delivery) {
         double result = 0;
+        Item item = delivery.getPackage().getItem();
 
-        if (inSizeRange(delivery.getPackage().getItem(), 5))
+        if (inSizeRange(item, 5))
             result += 10;
-        else if (inSizeRange(delivery.getPackage().getItem(), 10))
+        else if (inSizeRange(item, 10))
             result += 50;
-        else if (inSizeRange(delivery.getPackage().getItem(), 40))
+        else if (inSizeRange(item, 40))
             result += 60;
 
         result += (delivery.getPackage().getDistance() * delivery.getVehicle().getRate());
@@ -121,12 +134,9 @@ public class DeliveryService {
     }
 
     public static double calculateTotalOrderCost(Order order) {
-        double result = 0;
-
-        for (Delivery d : order.getDeliveries())
-            result += calculateSingleDeliveryCost(d);
-
-        return result;
+        return order.getDeliveries().stream()
+                .mapToDouble(DeliveryService::calculateSingleDeliveryCost)
+                .sum();
     }
 
     private static boolean inSizeRange(Item item, float size) {

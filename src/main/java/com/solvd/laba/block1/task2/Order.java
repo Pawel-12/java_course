@@ -2,20 +2,19 @@ package com.solvd.laba.block1.task2;
 
 import com.solvd.laba.block1.task2.persons.Client;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Order {
-    private Delivery[] deliveries;
+    private List<Delivery> deliveries;
     private Client client;
-    //private float totalPrice;
 
     public Order(Delivery[] deliveries, Client client) {
-        this.deliveries = deliveries;
+        this.deliveries = Arrays.stream(deliveries).toList();
         this.client = client;
-
-        //for (Delivery delivery : this.deliveries)
-        //  this.totalPrice += delivery.getPrice();
     }
 
-    public Delivery[] getDeliveries() {
+    public List<Delivery> getDeliveries() {
         return deliveries;
     }
 
@@ -23,19 +22,11 @@ public class Order {
         return client;
     }
 
-    /*public float getTotalPrice() {
-        return totalPrice;
-     }*/
-
     public void setDeliveries(Delivery[] deliveries) {
-        this.deliveries = deliveries;
+        this.deliveries = Arrays.stream(deliveries).toList();
     }
 
     public void setClient(Client client) {
         this.client = client;
     }
-
-    /*public void setTotalPrice(float totalPrice) {
-        this.totalPrice = totalPrice;
-    }*/
 }
