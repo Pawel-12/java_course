@@ -5,6 +5,7 @@ import com.solvd.laba.block1.task2.exceptions.NegativeSalaryException;
 import com.solvd.laba.block1.task2.utils.MyLinkedList;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 import static com.solvd.laba.block1.task2.Main.LOGGER;
 
@@ -29,6 +30,10 @@ public final class Driver extends Employee {
 
     public MyLinkedList<Delivery> getDeliveries() {
         return deliveries;
+    }
+
+    public Delivery getDelivery(Predicate<Delivery> filter) {
+        return deliveries.get(filter);
     }
 
     public ArrayList<String> getUsedVehicles() {

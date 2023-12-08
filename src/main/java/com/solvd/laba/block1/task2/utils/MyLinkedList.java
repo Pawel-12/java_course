@@ -3,6 +3,8 @@ package com.solvd.laba.block1.task2.utils;
 import com.solvd.laba.block1.task2.exceptions.mylinkedlistexceptions.InvalidIndexException;
 
 import java.util.Collection;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 public class MyLinkedList<T> {
     private static class Node<U> {
@@ -46,6 +48,14 @@ public class MyLinkedList<T> {
             return temp.getValue();
         else
             return null;
+    }
+
+    public T get(Predicate<T> filter) {
+        for (int i = 0; i < size; i++)
+            if (filter.test(get(i)))
+                return get(i);
+
+        return null;
     }
 
     private Node<T> getNode(int index) {
@@ -123,6 +133,16 @@ public class MyLinkedList<T> {
 
     public int size() {
         return size;
+    }
+
+    public Stream<T> stream() {
+        Stream.Builder<T> sb = Stream.builder();
+
+        int i = 0;
+        while (get(i) != null)
+            sb.add(get(i));
+
+        return sb.build();
     }
 }
 

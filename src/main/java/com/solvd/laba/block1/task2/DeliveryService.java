@@ -7,6 +7,7 @@ import com.solvd.laba.block1.task2.persons.Employee;
 import java.io.FileWriter;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Predicate;
 
 import static com.solvd.laba.block1.task2.Main.LOGGER;
 
@@ -27,12 +28,12 @@ public class DeliveryService {
         this.deliveriesArchive = new ArrayList<>();
     }
 
-    public void addClient(Client... client) {
-        Arrays.stream(client).distinct().forEach(c -> clients.putIfAbsent(c.getId(), c));
+    public void addClient(Client... clientsToAdd) {
+        Arrays.stream(clientsToAdd).distinct().forEach(c -> clients.putIfAbsent(c.getId(), c));
     }
 
-    public void addEmployee(Employee... employee) {
-        Arrays.stream(employee).distinct().forEach(emp -> employees.putIfAbsent(emp.getId(), emp));
+    public void addEmployee(Employee... employeesToAdd) {
+        Arrays.stream(employeesToAdd).distinct().forEach(emp -> employees.putIfAbsent(emp.getId(), emp));
     }
 
     public void newOrder(Client client, Delivery... delivery) {
@@ -88,8 +89,24 @@ public class DeliveryService {
         return clients;
     }
 
+    public Client getClient(Predicate<Client> filter) {
+        for (var c : clients.values())
+            if (filter.test(c))
+                return c;
+
+        return null;
+    }
+
     public Map<Integer, Employee> getEmployees() {
         return employees;
+    }
+
+    public Employee getEmployee(Predicate<Employee> filter) {
+        for (var e : employees.values())
+            if (filter.test(e))
+                return e;
+
+        return null;
     }
 
     public Map<Integer, ArrayList<Order>> getOrders() {
