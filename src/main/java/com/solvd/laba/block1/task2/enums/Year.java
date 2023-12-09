@@ -15,4 +15,11 @@ public enum Year {
     private Year(int year) {
         this.year = year;
     }
+
+    public Year next() {
+        if ((this.ordinal() + 1) >= Year.values().length)
+            return null;
+        else
+            return Year.values()[this.ordinal() + 1];
+    }
 }

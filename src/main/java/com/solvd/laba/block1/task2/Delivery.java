@@ -1,10 +1,15 @@
 package com.solvd.laba.block1.task2;
 
-public class Delivery {
+import com.solvd.laba.block1.task2.enums.DeliveryStatus;
+import com.solvd.laba.block1.task2.interfaces.Trackable;
+
+public class Delivery implements Trackable {
     private Package package1;
     private Vehicle vehicle;
     //private float price;
     private Priority priority;
+    private DeliveryStatus status = DeliveryStatus.CONFIRMED;
+    private Cords cords;
 
     private static int deliveriesCount;
 
@@ -20,6 +25,8 @@ public class Delivery {
         this.package1 = package1;
         this.vehicle = vehicle;
         this.priority = priority;
+
+        cords = package1.getSource().getCords();
 
         deliveriesCount++;
         //updatePrice();
@@ -40,6 +47,19 @@ public class Delivery {
 
     public Priority getPriority() {
         return priority;
+    }
+
+    public DeliveryStatus getStatus() {
+        return status;
+    }
+
+    @Override
+    public Cords getCords() {
+        return cords;
+    }
+
+    public String deliveryProgress() {
+        return "Progress " + (1.0 - (cords.calcDistance(package1.getDestination()) / package1.getDistance())) + "%";
     }
 
     public static int getDeliveriesCount() {
@@ -66,10 +86,22 @@ public class Delivery {
         //updatePrice();
     }
 
+    public void setStatus(DeliveryStatus status) {
+        this.status = status;
+    }
+
+    @Override
+    public void setCords(Cords cords) {
+        this.cords = cords;
+    }
+
     @Override
     public String toString() {
         return package1 +
                 ", vehicle = " + vehicle.getName() +
-                ", priority = " + priority.getName();
+                ", priority = " + priority.getName() +
+                ", status = " + status +
+                ", cords = " + cords +
+                " " + deliveryProgress();
     }
 }

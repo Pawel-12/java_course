@@ -54,7 +54,7 @@ public final class Driver extends Employee {
 
     @Override
     public void printAccountBalance() {
-        LOGGER.info("You have " + accountBalance + " on your salary account, next salary value is " + salary + '\n');
+        LOGGER.info("Hello " + name + " You have " + accountBalance + " on your salary account, next salary value is " + salary + '\n');
     }
 
     @Override

@@ -1,8 +1,15 @@
 package com.solvd.laba.block1.task2;
 
+import com.solvd.laba.block1.task2.enums.DeliveryStatus;
+import com.solvd.laba.block1.task2.enums.Month;
+import com.solvd.laba.block1.task2.enums.Year;
+import com.solvd.laba.block1.task2.interfaces.DeliveryCalc;
+import com.solvd.laba.block1.task2.interfaces.ItemTest;
 import com.solvd.laba.block1.task2.persons.Client;
 import com.solvd.laba.block1.task2.persons.Driver;
 import com.solvd.laba.block1.task2.persons.Employee;
+import org.apache.commons.lang3.tuple.MutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.FileWriter;
 import java.util.*;
@@ -12,6 +19,7 @@ import java.util.function.Predicate;
 import static com.solvd.laba.block1.task2.Main.LOGGER;
 
 public class DeliveryService {
+    private Pair<Year, Month> date;
     private Map<Integer, Client> clients;
     private Map<Integer, Employee> employees;
 
@@ -21,11 +29,30 @@ public class DeliveryService {
     private ArrayList<Delivery> deliveriesArchive;
 
     public DeliveryService() {
+        this.date = new MutablePair<>(Year.Y2023, Month.DECEMBER);
         this.clients = new HashMap<>();
         this.employees = new HashMap<>();
         this.orders = new HashMap<>();
         this.deliveries = new ArrayList<>();
         this.deliveriesArchive = new ArrayList<>();
+    }
+
+    public void nextMonth() {
+        date.setValue(date.getValue().next());
+
+        if (date.getValue() == Month.JANUARY)
+            date = new MutablePair<>(date.getKey().next(), date.getValue());
+
+        for (var e : employees.values())
+            e.setAccountBalance(e.getAccountBalance() + e.getSalary());
+    }
+
+    public Pair<Year, Month> getDate() {
+        return date;
+    }
+
+    public void setDate(Pair<Year, Month> date) {
+        this.date = date;
     }
 
     public void addClient(Client... clientsToAdd) {
@@ -72,15 +99,27 @@ public class DeliveryService {
                     i.getAndIncrement();
                 }*/
 
-        deliveries.forEach(del ->
+        /*deliveries.forEach(del ->
                 drivers.stream()
                         .filter(driver -> driver.getUsedVehicles().contains(del.getVehicle().getName()))
                         .findFirst().ifPresent(driver -> {
+                            del.setStatus(DeliveryStatus.TRANSIT);
                             driver.addDelivery(del);
                             deliveriesArchive.add(del);
                             deliveries.set(i.get(), null);
                             i.getAndIncrement();
-                        }));
+                        }));*/
+
+        deliveries.forEach(del -> {
+            Driver driver = getDriver(d -> d.getUsedVehicles().contains(del.getVehicle().getName()));
+            if (driver != null) {
+                del.setStatus(DeliveryStatus.TRANSIT);
+                driver.addDelivery(del);
+                deliveriesArchive.add(del);
+                deliveries.set(i.get(), null);
+                i.getAndIncrement();
+            }
+        });
 
         deliveries.removeIf(Objects::isNull);
     }
@@ -107,6 +146,10 @@ public class DeliveryService {
                 return e;
 
         return null;
+    }
+
+    public Driver getDriver(Predicate<Driver> filter) {
+        return (Driver) getEmployee(e -> e instanceof Driver && filter.test((Driver) e));
     }
 
     public Map<Integer, ArrayList<Order>> getOrders() {
@@ -137,17 +180,26 @@ public class DeliveryService {
         double result = 0;
         Item item = delivery.getPackage().getItem();
 
-        if (inSizeRange(item, 5))
+        ItemTest<Item> allSizes = (i, size) -> {
+            boolean widthOrHeight = (i.getWidth() <= size) || (i.getHeight() <= size);
+            boolean depthOrWeight = (i.getDepth() <= size) || (i.getWeight() <= size);
+            return widthOrHeight || depthOrWeight;
+        };
+
+        if (allSizes.test(item, 5))
             result += 10;
-        else if (inSizeRange(item, 10))
+        else if (allSizes.test(item, 10))
             result += 50;
-        else if (inSizeRange(item, 40))
+        else if (allSizes.test(item, 40))
             result += 60;
 
-        result += (delivery.getPackage().getDistance() * delivery.getVehicle().getRate());
-        result *= delivery.getPriority().getRate();
-
-        return result;
+        DeliveryCalc<Delivery> calcCost = (del, res) -> {
+            res += (del.getPackage().getDistance() * del.getVehicle().getRate());
+            res *= del.getPriority().getRate();
+            return res;
+        };
+        
+        return calcCost.calc(delivery, result);
     }
 
     public static double calculateTotalOrderCost(Order order) {

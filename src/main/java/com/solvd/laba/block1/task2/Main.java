@@ -1,8 +1,12 @@
 package com.solvd.laba.block1.task2;
 
+import com.solvd.laba.block1.task2.enums.DeliveryStatus;
+import com.solvd.laba.block1.task2.enums.Month;
+import com.solvd.laba.block1.task2.enums.Year;
 import com.solvd.laba.block1.task2.persons.Client;
 import com.solvd.laba.block1.task2.persons.Driver;
 import com.solvd.laba.block1.task2.utils.FileStats;
+import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,6 +25,9 @@ public class Main {
         System.out.println();
 
         DeliveryService delService = new DeliveryService();
+
+        delService.setDate(new MutablePair<>(Year.Y2023, Month.DECEMBER));
+        LOGGER.info("Current date = " + delService.getDate() + '\n');
 
         Vehicle car = null;
         Vehicle airplane = null;
@@ -45,6 +52,7 @@ public class Main {
 
         Client john = new Client("John");
         delService.addClient(john);
+        LOGGER.info(delService.getClient(c -> c.getName().equals("John")));
 
         Driver mike = null;
 
@@ -55,6 +63,7 @@ public class Main {
         }
 
         delService.addEmployee(mike);
+        LOGGER.info(delService.getEmployee(e -> e.getName().equals("Mike")));
 
 
         Item letter = new Item("Letter", 5, 5, 5, 0.1F);
@@ -72,19 +81,24 @@ public class Main {
 
         john.printAccountBalance();
 
+        LOGGER.info("New Order by " + john.getName() + " to deliver \n - " + delivery1 + "\n - " + delivery2 + '\n');
+
         delService.newOrder(john, delivery1, delivery2);
 
         john.printAccountBalance();
 
 
         delService.processDeliveries();
+        delService.nextMonth();
+        LOGGER.info("Current date = " + delService.getDate() + '\n');
 
 
-        LOGGER.info('\n' + mike.toString());
+        LOGGER.info(mike.toString());
         mike.printAccountBalance();
+        LOGGER.info(mike.getDelivery(d -> d.getStatus() == DeliveryStatus.TRANSIT) + "\n");
 
 
-        LOGGER.info("\nNot assigned:\n " + delService.getDeliveries());
+        LOGGER.info("Not assigned:\n " + delService.getDeliveries());
 
         delService.saveClients();
     }

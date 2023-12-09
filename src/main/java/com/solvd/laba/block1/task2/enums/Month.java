@@ -24,6 +24,13 @@ public enum Month {
         this.number = number;
     }
 
+    public Month next() {
+        if (this.ordinal() == 11)
+            return JANUARY;
+        else
+            return Month.values()[this.ordinal() + 1];
+    }
+
     public int distance(Month month) {
         return abs(this.number - month.number);
     }

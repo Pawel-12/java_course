@@ -18,9 +18,9 @@ public class Client extends Person {
     @Override
     public void printAccountBalance() {
         if (accountBalance >= 0)
-            LOGGER.info("You have " + accountBalance + " available to pay for deliveries\n");
+            LOGGER.info("Hello " + name + " You have " + accountBalance + " available to pay for deliveries\n");
         else
-            LOGGER.info("You have unpaid orders with total value of " + (accountBalance * -1) + '\n');
+            LOGGER.info("Hello " + name + " You have unpaid orders with total value of " + (accountBalance * -1) + '\n');
     }
 
     @Override
