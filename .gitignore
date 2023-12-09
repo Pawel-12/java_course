@@ -31,5 +31,4 @@ bin/
 .idea
 java_course.iml
 target
-data
 logs

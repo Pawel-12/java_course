@@ -165,7 +165,7 @@ public class DeliveryService {
     }
 
     public void saveClients() {
-        try (FileWriter fw = new FileWriter("data/clients.txt")) {
+        try (FileWriter fw = new FileWriter("src/main/resources/data/clients.txt")) {
             for (Client c : clients.values())
                 fw.write(c.toString());
 
@@ -198,7 +198,7 @@ public class DeliveryService {
             res *= del.getPriority().getRate();
             return res;
         };
-        
+
         return calcCost.calc(delivery, result);
     }
 

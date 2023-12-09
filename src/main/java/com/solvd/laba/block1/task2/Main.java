@@ -15,13 +15,13 @@ import java.util.List;
 
 public class Main {
     static {
-        System.setProperty("log4j.configurationFile", "log4j2.xml");
+        System.setProperty("log4j.configurationFile", "src/main/resources/log4j2.xml");
     }
 
     public static final Logger LOGGER = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
-        FileStats.countUniqueWords("data/log.txt");
+        FileStats.countUniqueWords("src/main/resources/data/log.txt");
         System.out.println();
 
         DeliveryService delService = new DeliveryService();

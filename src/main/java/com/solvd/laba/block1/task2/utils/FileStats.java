@@ -28,8 +28,8 @@ public class FileStats {
                         words.putIfAbsent(s, 0);
                         words.replace(s, words.get(s) + 1);
                     });
-            
-            writeStringToFile(new File("data/stats.txt"), words.toString(), StandardCharsets.UTF_8);
+
+            writeStringToFile(new File("src/main/resources/data/stats.txt"), words.toString(), StandardCharsets.UTF_8);
         } catch (Exception e) {
             LOGGER.error("countUniqueWords() error ", e);
         }
