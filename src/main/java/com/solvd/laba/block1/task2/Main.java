@@ -3,6 +3,8 @@ package com.solvd.laba.block1.task2;
 import com.solvd.laba.block1.task2.enums.DeliveryStatus;
 import com.solvd.laba.block1.task2.enums.Month;
 import com.solvd.laba.block1.task2.enums.Year;
+import com.solvd.laba.block1.task2.exceptions.NegativeRateException;
+import com.solvd.laba.block1.task2.exceptions.NegativeSalaryException;
 import com.solvd.laba.block1.task2.persons.Client;
 import com.solvd.laba.block1.task2.persons.Driver;
 import com.solvd.laba.block1.task2.utils.FileStats;
@@ -35,7 +37,7 @@ public class Main {
         try {
             car = new Vehicle("Car", 1.25F);
             airplane = new Vehicle("Airplane", 2.25F);
-        } catch (Exception e) {
+        } catch (NegativeRateException e) {
             LOGGER.error("Caught exception ", e);
         }
 
@@ -45,7 +47,7 @@ public class Main {
         try {
             normal = new Priority("Normal", 1);
             fast = new Priority("Fast", 1.5F);
-        } catch (Exception e) {
+        } catch (NegativeRateException e) {
             LOGGER.error("Caught exception ", e);
         }
 
@@ -58,7 +60,7 @@ public class Main {
 
         try {
             mike = new Driver("Mike", 2000, new ArrayList<>(List.of("Car")));
-        } catch (Exception e) {
+        } catch (NegativeSalaryException e) {
             LOGGER.error("Caught exception ", e);
         }
 

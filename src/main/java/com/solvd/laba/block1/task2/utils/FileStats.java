@@ -3,6 +3,7 @@ package com.solvd.laba.block1.task2.utils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -30,7 +31,7 @@ public class FileStats {
                     });
 
             writeStringToFile(new File("src/main/resources/data/stats.txt"), words.toString(), StandardCharsets.UTF_8);
-        } catch (Exception e) {
+        } catch (IOException e) {
             LOGGER.error("countUniqueWords() error ", e);
         }
     }

@@ -12,6 +12,7 @@ import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
@@ -168,10 +169,7 @@ public class DeliveryService {
         try (FileWriter fw = new FileWriter("src/main/resources/data/clients.txt")) {
             for (Client c : clients.values())
                 fw.write(c.toString());
-
-            fw.close();
-
-        } catch (Exception e) {
+        } catch (IOException e) {
             LOGGER.error("FileWriter error ", e);
         }
     }
