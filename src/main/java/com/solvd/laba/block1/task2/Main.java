@@ -23,10 +23,27 @@ public class Main {
     public static final Logger LOGGER = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
-        FileStats.countUniqueWords("src/main/resources/data/log.txt");
+        Thread fileStats = new Thread(() -> FileStats.countUniqueWords("src/main/resources/data/log.txt"));
+        fileStats.start();
+        
         System.out.println();
 
         DeliveryService delService = new DeliveryService();
+
+        Thread fileSaverThread = new Thread(() -> {
+            while (!Thread.currentThread().isInterrupted()) {
+                delService.saveClients();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    LOGGER.info("fileThread interrupted " + e);
+                    Thread.currentThread().interrupt();
+                }
+                delService.saveClients();
+            }
+        });
+
+        fileSaverThread.start();
 
         delService.setDate(new MutablePair<>(Year.Y2023, Month.DECEMBER));
         LOGGER.info("Current date = " + delService.getDate() + '\n');
@@ -102,6 +119,6 @@ public class Main {
 
         LOGGER.info("Not assigned:\n " + delService.getDeliveries());
 
-        delService.saveClients();
+        fileSaverThread.interrupt();
     }
 }
